@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quill</title>
+
+    <!-- Include stylesheet -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+</head>
+<body>
+
+
+<!-- Create the editor container -->
+<div id="editor">
+  <p>Hello World!</p>
+  <p>Some initial <strong>bold</strong> text</p>
+  <p><br></p>
+</div>
+
+<button id="btn">Save</button>
+<button id="btn1">Display</button>
+
+<!-- Include the Quill library -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script>
+
+
+  var quill = new Quill('#editor', {
+    // modules: {
+    //     toolbar: [
+    //         [{ 'font': [] }],
+    //         [{ 'header': 1 }, { 'header': 2 }, 'code-block', 'bold', 'link'],               
+    //         [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+    //         [{ 'color': [] }, /*{ 'background': [] }*/],     
+    //         [{ 'size': ['small', false, 'large', 'huge'] }],   
+    //         [{ 'align': [] }, { 'direction': 'rtl' }],
+    //         ['video'],
+    //     ]
+    // },
+
+    // theme: 'snow'
+    // theme: 'bubble'
+  
+  });
+
+
+  //
+  var delta;
+  var BTN = document.querySelector("#btn");
+  var BTN1 = document.querySelector("#btn1")
+
+  //
+  BTN.addEventListener('click', function(e){
+    delta = quill.getContents();
+    quill.setContents([]);
+
+    // save in db
+    var articleContent = JSON.stringify(delta["ops"]);
+
+  })
+  
+  //
+  BTN1.addEventListener('click', function(e){
+    quill.setContents(delta["ops"]);
+  })
+
+  
+
+
+
+</script>
+
+
+</body>
+</html>
